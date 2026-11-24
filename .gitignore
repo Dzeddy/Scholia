@@ -1,0 +1,19 @@
+# Dependencies and environments
+node_modules/
+frontend/dist/
+backend/.venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local vaults, databases, and personal scripts
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+backend/import_*.py
+
+# OS and editor artifacts
+.DS_Store
+.env
+.env.local

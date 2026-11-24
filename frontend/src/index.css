@@ -1,0 +1,520 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+:root {
+  /* Light — Gallery Alabaster */
+  --bg-canvas: #FAF9F5;
+  --bg-sheet: #FFFFFF;
+  --bg-subtle: #F2F1EC;
+  --bg-subtle-hover: #EAE8E1;
+
+  --border-hairline: rgba(20, 20, 19, 0.08);
+  --border-sheet: rgba(20, 20, 19, 0.06);
+  --border-strong: rgba(20, 20, 19, 0.14);
+
+  --shadow-sheet: 0 1px 2px rgba(20, 20, 19, 0.03), 0 8px 28px rgba(20, 20, 19, 0.04);
+  --shadow-float: 0 2px 8px rgba(20, 20, 19, 0.04), 0 12px 32px rgba(20, 20, 19, 0.06);
+
+  --ink-primary: #141413;
+  --ink-secondary: #5C5A55;
+  --ink-muted: #918F89;
+
+  --cta-bg: #141413;
+  --cta-bg-hover: #2A2A28;
+  --cta-ink: #FFFFFF;
+
+  /* Surgical Electric Vermilion accent */
+  --accent: #D93D1A;
+  --accent-hover: #B93112;
+  --accent-soft: rgba(217, 61, 26, 0.08);
+
+  /* Quiet Semantic Dots */
+  --status-forest: #1E7A4D;
+  --status-forest-soft: rgba(30, 122, 77, 0.09);
+  --status-muted: #B5B2AA;
+  --status-danger: #C92A2A;
+  --status-danger-soft: rgba(201, 42, 42, 0.08);
+
+  --dot-grid-color: rgba(20, 20, 19, 0.085);
+
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.dark {
+  /* Dark — Obsidian Studio */
+  --bg-canvas: #0E0E0D;
+  --bg-sheet: #161615;
+  --bg-subtle: #20201E;
+  --bg-subtle-hover: #2B2B28;
+
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-sheet: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --shadow-sheet: 0 1px 2px rgba(0, 0, 0, 0.28), 0 10px 30px rgba(0, 0, 0, 0.34);
+  --shadow-float: 0 4px 16px rgba(0, 0, 0, 0.38), 0 16px 40px rgba(0, 0, 0, 0.45);
+
+  --ink-primary: #F5F4EF;
+  --ink-secondary: #A6A39B;
+  --ink-muted: #706E68;
+
+  --cta-bg: #F5F4EF;
+  --cta-bg-hover: #E5E3DB;
+  --cta-ink: #141413;
+
+  --accent: #EF5A37;
+  --accent-hover: #F57253;
+  --accent-soft: rgba(239, 90, 55, 0.14);
+
+  --status-forest: #3EA671;
+  --status-forest-soft: rgba(62, 166, 113, 0.13);
+  --status-muted: #5A5853;
+  --status-danger: #F06A6A;
+  --status-danger-soft: rgba(240, 106, 106, 0.13);
+
+  --dot-grid-color: rgba(255, 255, 255, 0.085);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Gallery Sheet & Floating Surfaces */
+.gallery-sheet {
+  background-color: var(--bg-sheet);
+  border: 1px solid var(--border-sheet);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sheet);
+}
+
+.floating-dock {
+  background-color: var(--bg-sheet);
+  border: 1px solid var(--border-sheet);
+  border-radius: 16px;
+  box-shadow: var(--shadow-float);
+}
+
+/* Opinionated Pitch-Ink Pill Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  background-color: var(--cta-bg);
+  color: var(--cta-ink);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  border: none;
+  cursor: pointer;
+  transition: background-color 140ms ease, transform 120ms ease, opacity 140ms ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--cta-bg-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.52rem 1.05rem;
+  border-radius: 9999px;
+  background-color: var(--bg-subtle);
+  color: var(--ink-primary);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-subtle-hover);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Antigravity-inspired open spatial dot grid */
+.dot-grid-bg {
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(var(--dot-grid-color) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Quiet Rhythm-style micro-label */
+.meta-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Editorial Study Notes & Source Text Prose (Newsreader) */
+.scholia-prose {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: var(--ink-primary);
+  max-width: 65ch;
+}
+
+.scholia-prose h1 {
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border-hairline);
+  color: var(--ink-primary);
+}
+
+.scholia-prose h2 {
+  font-family: var(--font-sans);
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 1.75rem 0 0.6rem 0;
+  color: var(--ink-primary);
+}
+
+.scholia-prose h3 {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 1.25rem 0 0.45rem 0;
+  color: var(--ink-primary);
+}
+
+.scholia-prose p {
+  margin: 0 0 0.9rem 0;
+}
+
+.scholia-prose a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.scholia-prose a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.scholia-prose ul,
+.scholia-prose ol {
+  margin: 0 0 1.1rem 0;
+  padding-left: 1.35rem;
+}
+
+.scholia-prose ul {
+  list-style-type: disc;
+}
+
+.scholia-prose ol {
+  list-style-type: decimal;
+}
+
+.scholia-prose li {
+  margin-bottom: 0.45rem;
+}
+
+.scholia-prose strong {
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+.scholia-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background-color: var(--bg-subtle);
+  border-radius: 5px;
+  padding: 0.12rem 0.36rem;
+}
+
+.scholia-prose blockquote {
+  margin: 1.2rem 0;
+  padding: 0.25rem 0 0.25rem 1.15rem;
+  border-left: 2px solid var(--accent);
+  color: var(--ink-secondary);
+}
+
+/* Seminar Dialogue Prose (Plus Jakarta Sans) */
+.scholia-dialogue {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-primary);
+}
+
+.scholia-dialogue p {
+  margin: 0 0 0.7rem 0;
+}
+
+.scholia-dialogue p:last-child {
+  margin-bottom: 0;
+}
+
+.scholia-dialogue ul,
+.scholia-dialogue ol {
+  margin: 0.45rem 0 0.7rem 0;
+  padding-left: 1.25rem;
+}
+
+.scholia-dialogue ul {
+  list-style-type: disc;
+}
+
+.scholia-dialogue ol {
+  list-style-type: decimal;
+}
+
+.scholia-dialogue li {
+  margin-bottom: 0.32rem;
+}
+
+.scholia-dialogue strong {
+  font-weight: 600;
+}
+
+.scholia-dialogue code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  background-color: var(--bg-subtle);
+  border-radius: 5px;
+  padding: 0.08rem 0.32rem;
+}
+
+/* Clickable Page Citation Pill */
+.citation-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.76em;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border: none;
+  border-radius: 9999px;
+  padding: 0.12rem 0.48rem;
+  margin: 0 0.14rem;
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: opacity 120ms ease;
+}
+
+.citation-btn:hover {
+  opacity: 0.8;
+}
+
+/* KaTeX Display Equation Surface */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.9rem 1.1rem;
+  margin: 1.1rem 0 !important;
+  background-color: var(--bg-subtle);
+  border-radius: 10px;
+}
+
+/* Minimalist Code Blocks */
+.scholia-code-block {
+  margin: 1rem 0;
+  border-radius: 10px;
+  background-color: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.scholia-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.9rem;
+  border-bottom: 1px solid var(--border-hairline);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.scholia-code-block pre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.58;
+  color: var(--ink-primary);
+  background-color: transparent;
+}
+
+.scholia-code-block pre code {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Hairline Editorial Markdown Tables (No vertical grid-line clutter) */
+.scholia-prose table,
+.scholia-dialogue table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.scholia-prose th,
+.scholia-dialogue th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.scholia-prose td,
+.scholia-dialogue td {
+  padding: 0.65rem 0.75rem 0.65rem 0;
+  border-bottom: 1px solid var(--border-hairline);
+  color: var(--ink-primary);
+  vertical-align: top;
+}
+
+.scholia-prose tr:last-child td,
+.scholia-dialogue tr:last-child td {
+  border-bottom: none;
+}
+
+/* Clean Zoomable Figures */
+.scholia-prose img,
+.scholia-dialogue img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem auto;
+  padding: 0.5rem;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-hairline);
+  border-radius: 12px;
+  cursor: zoom-in;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.scholia-prose img:hover,
+.scholia-dialogue img:hover {
+  box-shadow: var(--shadow-sheet);
+}
+
+.scholia-prose details.scholia-details {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background-color: var(--bg-subtle);
+}
+
+.scholia-prose details.scholia-details summary {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  cursor: pointer;
+}
+
+.scholia-prose h1,
+.scholia-prose h2,
+.scholia-prose h3 {
+  scroll-margin-top: 28px;
+}
+
+/* Bespoke minimalist select control */
+.scholia-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23918F89' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 14px 14px;
+  padding-right: 2.25rem !important;
+}
+
+/* Whisper-quiet scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(145, 143, 137, 0.28);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(145, 143, 137, 0.48);
+}
